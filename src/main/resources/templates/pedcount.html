@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Melbourne Data API Client Demo - Welcome</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Latest compiled and minified CSS -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://bluemix.net/">
+                <img src="images/bluemix-tiny.png"
+                     th:src="@{images/bluemix-tiny.png}"
+                     alt="Bluemix" height="32" width="32"
+                     border="0"/>
+            </a>
+            <a class="navbar-brand" href="http://bluemix.net/">
+                <img src="images/PoweredByIBM.png"
+                     th:src="@{images/PoweredByIBM.png}"
+                     alt="poweredByIBM"
+                     border="0"/>
+            </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right nav-pills">
+                <li>
+                    <a th:href="@{/}">
+                        <img src="images/b_home.png"
+                             th:src="@{images/b_home.png}"
+                             alt="Home"
+                             border="0"/>
+                        Home
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- NAVBAR CODE END -->
+
+<div class="bs-example">
+    <div class="page-header">
+        <h1>Melbourne Data - <small>API Client Demo</small></h1>
+    </div>
+</div>
+
+<!-- Add table with Results only if results exist -->
+<div class="bs-example" th:if="${pedcountsSize > 0}">
+    <div class="alert alert-success fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Success!</strong> Found <b th:text="${pedcountsSize}"></b> Pedestrian Sensor Count Entries
+    </div>
+    <div class="col-xs-8">
+        <table class="table table-hover table-bordered table-striped table-condensed" id="table_results">
+            <thead>
+            <tr>
+                <th colspan="5" style="text-align:center"><b>Pedestrian Sensor Count Entries</b></th>
+            </tr>
+            <tr>
+                <th style="text-align:center">Date/Time</th>
+                <th style="text-align:center">Count</th>
+                <th style="text-align:center">Sensor ID#</th>
+                <th style="text-align:center">Sensor Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="ped,iterStat : ${pedcounts}">
+                <td th:text="${ped.dateAndTime}" style="text-align:center"></td>
+                <td th:text="${ped.pedCount}" style="text-align:center"></td>
+                <td th:text="${ped.sensorId}" style="text-align:center"></td>
+                <td th:text="${ped.sensorName}" style="text-align:center"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="clearfix">
+</div>
+
+<div th:include="footer :: copy"></div>
+
+</body>
+</html>

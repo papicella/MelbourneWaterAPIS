@@ -1,0 +1,8 @@
+applications:
+- name: pas-melbdata-apis
+  memory: 512M
+  instances: 1
+  host: pas-melbdata-apis
+  path: ./target/MelbourneWaterAPIS-0.0.1-SNAPSHOT.jar
+  services:
+    - "Melbourne Data with API's on Bluemix-9k"
